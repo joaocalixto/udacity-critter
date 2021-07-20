@@ -7,6 +7,7 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +26,9 @@ public class Pet {
     @JoinColumn(name = "user_id") //many plants can belong to one delivery
     private User user;
 
-    @ManyToMany(mappedBy = "pets")
-    private List<Schedule> schedules;
+    @ManyToMany(targetEntity = Schedule.class)
+    @JoinTable(name = "schedule_pets", joinColumns = @JoinColumn(name = "schedule_id"))
+    private List<Schedule> schedulePets = new ArrayList<>();
 
     private LocalDate birthDate;
     private String notes;

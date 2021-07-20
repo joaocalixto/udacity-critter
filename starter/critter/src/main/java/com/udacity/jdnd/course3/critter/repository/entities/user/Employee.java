@@ -2,6 +2,8 @@ package com.udacity.jdnd.course3.critter.repository.entities.user;
 
 import com.udacity.jdnd.course3.critter.repository.entities.schedule.Schedule;
 import lombok.Data;
+import org.dom4j.tree.AbstractEntity;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -23,7 +25,8 @@ public class Employee extends User{
     @Enumerated(EnumType.STRING)
     private Set<DayOfWeek> daysAvailable;
 
-    @ManyToMany(mappedBy = "employees", cascade = CascadeType.ALL)
-    private List<Schedule> schedules;
+    @ManyToMany(targetEntity = Schedule.class)
+    @JoinTable(name = "schedule_employees", joinColumns = @JoinColumn(name = "schedule_id"))
+    private List<Schedule> scheduleEmployees;
 
 }

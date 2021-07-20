@@ -3,10 +3,13 @@ package com.udacity.jdnd.course3.critter.service;
 import com.udacity.jdnd.course3.critter.exception.EmployeeNotFoundException;
 import com.udacity.jdnd.course3.critter.repository.EmployeeRepository;
 import com.udacity.jdnd.course3.critter.repository.entities.user.Employee;
+import com.udacity.jdnd.course3.critter.repository.entities.user.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,5 +38,10 @@ public class EmployeeService {
 
     public List<Employee> findAllEmployees(){
         return employeeRepository.findAll();
+    }
+
+    public List<Employee> findEmployeesForService(Set<EmployeeSkill> skills, LocalDate date){
+//        return employeeRepository.afindDistinctBySkillsInAndScheduleEmployeesDateIsNot(skills, date)
+        return new ArrayList<>();
     }
 }
