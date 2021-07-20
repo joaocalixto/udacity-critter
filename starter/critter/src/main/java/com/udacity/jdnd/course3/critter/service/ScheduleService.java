@@ -10,6 +10,7 @@ import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,6 +33,23 @@ public class ScheduleService {
         return employeeRepository.findAllById(employeeIds);
     }
 
+    public List<Schedule> getScheduleForEmployee(Long employeeId){
+        return scheduleRepository.findByEmployeesId(employeeId);
+    }
+
+    public List<Schedule> getScheduleForCustomer(Long customerId){
+        return scheduleRepository.findByPetsUserId(customerId);
+    }
+
+    public List<Schedule> findAll(){
+        return scheduleRepository.findAll();
+    }
+
+    public List<Schedule> getScheduleForPet(Long petId){
+        return scheduleRepository.findByPetsId(petId);
+    }
+
+    @Transactional
     public Schedule save(Schedule schedule){
 
         Schedule scheduleSaved = scheduleRepository.save(schedule);
@@ -54,13 +72,7 @@ public class ScheduleService {
         return scheduleRepository.findById(scheduleId).get();
     }
 
-    public List<Schedule> findAll(){
-        return scheduleRepository.findAll();
-    }
 
-    public List<Schedule> getScheduleForPet(Long petId){
-        return scheduleRepository.findByPetsId(petId);
-    }
 
 
 }

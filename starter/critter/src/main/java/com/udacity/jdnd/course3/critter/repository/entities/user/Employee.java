@@ -7,6 +7,7 @@ import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,6 @@ public class Employee extends User{
 
     @ManyToMany(targetEntity = Schedule.class)
     @JoinTable(name = "schedule_employees", joinColumns = @JoinColumn(name = "schedule_id"))
-    private List<Schedule> scheduleEmployees;
+    private List<Schedule> scheduleEmployees = new ArrayList<>();
 
 }

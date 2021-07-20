@@ -54,13 +54,13 @@ public class PetController {
         return petService.findByOwnerId(ownerId).stream().map(pet -> convertEntityToPetDTO(pet)).collect(Collectors.toList());
     }
 
-    public static PetDTO convertEntityToPetDTO(Pet plant){
+    public static PetDTO convertEntityToPetDTO(Pet pet){
 
         PetDTO petDTO = new PetDTO();
         if(petDTO != null) {
-            BeanUtils.copyProperties(plant, petDTO);
-            if (plant.getUser() != null){
-                petDTO.setOwnerId(plant.getId());
+            BeanUtils.copyProperties(pet, petDTO);
+            if (pet.getUser() != null){
+                petDTO.setOwnerId(pet.getUser().getId());
             }
         }
         return petDTO;
@@ -73,6 +73,7 @@ public class PetController {
         if (petDTO.getOwnerId() != 0){
             Customer customer = customerService.findById(petDTO.getOwnerId());
             pet.setUser(customer);
+
         }
 
 
